@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1級小型自動車整備士 試験対策</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #1a1d2e;
+  --bg3: #252840;
+  --card: #1e2133;
+  --border: #2e3354;
+  --accent: #4f8ef7;
+  --accent2: #7c6af7;
+  --green: #22d3a0;
+  --red: #f7546a;
+  --yellow: #f7c948;
+  --text: #e8eaf6;
+  --text2: #9099c8;
+  --text3: #5a6394;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  min-height: 100vh;
+}
+
+/* ヘッダー */
+.header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header h1 {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+.company-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.site-link-btn, .util-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.site-link-btn {
+  border: 1px solid var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(79,142,247,0.25);
+}
+.site-link-btn:hover { opacity: 0.85; }
+.util-btn {
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text2);
+  cursor: pointer;
+  padding: 0 10px;
+}
+.util-btn:hover { background: var(--bg2); border-color: var(--text3); }
+.header-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; white-space: nowrap; }
+.reset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  box-sizing: border-box;
+  font-size: 12px;
+  padding: 0 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text2);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.reset-btn:hover { background: var(--bg3); }
+
+/* モーダル（配布QR／ホーム画面追加案内） */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text3);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+}
+.modal-msg {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.qr-img {
+  width: 160px;
+  height: 160px;
+  background: #fff;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  margin: 0 auto 12px;
+  display: block;
+}
+.modal-sub { font-size: 12px; color: var(--text3); line-height: 1.6; }
+.modal-instructions { text-align: left; font-size: 12.5px; color: var(--text2); line-height: 1.9; margin-top: 4px; }
+.modal-instructions b { color: var(--text); }
+
+/* メインレイアウト */
+.container { max-width: 680px; margin: 0 auto; padding: 16px 12px 80px; }
+
+/* 統計カード */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 8px;
+  text-align: center;
+}
+.stat-val { font-size: 22px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.stat-val.green { color: var(--green); }
+.stat-val.accent { color: var(--accent); }
+.stat-val.yellow { color: var(--yellow); }
+.stat-lbl { font-size: 10px; color: var(--text3); }
+
+/* ジャンル別 */
+.genre-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.genre-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+  font-size: 12px;
+}
+.genre-name { width: 110px; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.genre-track {
+  flex: 1;
+  height: 5px;
+  background: var(--bg3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.genre-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+.genre-pct { width: 32px; text-align: right; color: var(--text3); font-size: 11px; }
+.genre-cnt { width: 28px; text-align: right; color: var(--text3); font-size: 10px; }
+
+/* モード選択 */
+.mode-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+.mode-bar::-webkit-scrollbar { display: none; }
+.mode-btn {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text2);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.mode-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.mode-btn:hover:not(.active) { background: var(--bg3); }
+
+/* 進捗バー */
+.progress-wrap { margin-bottom: 16px; }
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text3);
+  margin-bottom: 5px;
+}
+.progress-track {
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* 問題カード */
+.q-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 12px;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.q-meta {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+.badge-genre { background: rgba(79,142,247,0.15); color: var(--accent); }
+.badge-year { background: var(--bg3); color: var(--text3); }
+.badge-diff { background: rgba(247,201,72,0.15); color: var(--yellow); }
+
+.q-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 14px;
+  white-space: pre-wrap;
+}
+
+/* 図 */
+.q-img {
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+  display: block;
+  background: var(--bg2);
+}
+.q-img-placeholder {
+  background: var(--bg3);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 14px;
+  color: var(--text3);
+  font-size: 12px;
+}
+
+/* 選択肢 */
+.choices { display: flex; flex-direction: column; gap: 7px; }
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg2);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+  transition: all 0.15s;
+  text-align: left;
+  width: 100%;
+}
+.choice:hover:not(:disabled) { background: var(--bg3); border-color: var(--accent); }
+.choice:disabled { cursor: default; }
+.choice.correct { border-color: var(--green); background: rgba(34,211,160,0.1); color: var(--green); }
+.choice.wrong { border-color: var(--red); background: rgba(247,84,106,0.1); color: var(--red); }
+.choice.reveal { border-color: var(--green); background: rgba(34,211,160,0.1); color: var(--green); }
+.choice-lbl { font-weight: 700; min-width: 18px; flex-shrink: 0; }
+
+/* 解説 */
+.explanation {
+  margin-top: 14px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.8;
+  animation: fadeIn 0.3s ease;
+}
+.exp-result {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.exp-result.ok { color: var(--green); }
+.exp-result.ng { color: var(--red); }
+.exp-correct { color: var(--text); margin-bottom: 10px; white-space: pre-wrap; }
+.exp-correct span { color: var(--green); font-weight: 700; }
+.exp-wrong { color: var(--text2); }
+.exp-wrong-item { display: flex; gap: 6px; margin-bottom: 4px; white-space: pre-wrap; }
+.exp-wrong-item .lbl { color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+/* ボタン行 */
+.btn-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.btn-next {
+  flex: 1;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-next:hover { opacity: 0.85; }
+.btn-weak {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--yellow);
+  background: rgba(247,201,72,0.1);
+  color: var(--yellow);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-weak:hover { background: rgba(247,201,72,0.2); }
+
+/* ローディング */
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text3);
+  font-size: 14px;
+}
+.loading-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin: 0 3px;
+  animation: bounce 1.2s infinite;
+}
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce { 0%,80%,100%{ transform:translateY(0) } 40%{ transform:translateY(-8px) } }
+
+/* 結果画面 */
+.result-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.result-pct { font-size: 56px; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+.result-pct.great { color: var(--green); }
+.result-pct.good { color: var(--accent); }
+.result-pct.poor { color: var(--red); }
+.result-sub { font-size: 14px; color: var(--text2); margin-bottom: 20px; }
+.weak-section { text-align: left; margin-top: 16px; }
+.weak-title { font-size: 12px; color: var(--text3); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; }
+.weak-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.weak-tag {
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--yellow);
+  background: rgba(247,201,72,0.1);
+  color: var(--yellow);
+  font-size: 12px;
+}
+.result-btns {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/* 年度フィルター */
+.year-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+.year-bar::-webkit-scrollbar { display: none; }
+.year-btn {
+  flex-shrink: 0;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text3);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.year-btn.active { background: var(--bg3); border-color: var(--text2); color: var(--text); }
+.year-btn:hover:not(.active) { background: var(--bg3); }
+
+/* 苦手リスト */
+.weak-list-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.weak-q-item {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+  cursor: pointer;
+}
+.weak-q-item:hover { background: var(--bg3); }
+.weak-q-id { color: var(--red); font-weight: 700; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚙️ 1級小型 試験対策 <br>
+    <span class="company-row">
+      <span>株式会社エイニーズガレージ</span>
+      <a class="site-link-btn" href="https://www.annys-garage.com" target="_blank" rel="noopener noreferrer">WEBサイト</a>
+      <button class="util-btn" onclick="toggleModal('qrModal')">QR配布</button>
+      <button class="util-btn" onclick="toggleModal('bookmarkModal')">ホーム追加</button>
+    </span>
+  </h1>
+  <div class="header-right">
+    <button class="reset-btn" onclick="confirmReset()">リセット</button>
+  </div>
+</div>
+
+<!-- 配布用QRモーダル -->
+<div id="qrModal" class="modal-overlay" onclick="closeModalOverlay(event,'qrModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="toggleModal('qrModal')">✕</button>
+    <p class="modal-msg">現場の仲間にも共有してみませんか？📲<br>一緒に整備知識をアップデートしましょう</p>
+    <img class="qr-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeAQAAAAB6HIMaAAACAUlEQVR4nO2YQYrdQAxEX38Z/lKGHGAuEpBvNsyRcoP2Uf4BAvLS0Kay6P/JJsOsQrSINsZoUxRSVamb+LSu2+c9+N/8qokSwDIsMXVTN02+Y5RDe4OQBAzvHO/XGgNMUhbk9ga0tgELXG99sHNsHG35h4C+bPrHuYY9tvtjqwHoj7U8v8dmP7dzQQjvy78D9CVaweJqKxDXtx/fl8DFURDtDfbWGsdmGffk/ni/J1drbS2IFv2uPvVBGfO/noKhjAHAcEld0gBlVNVbFtcA2NtKW/fFBbupV5yEBLBEyXApwbsllgW5RQkuqQ/vysA1XMNVchKQBGEJ3qU+XCZZ5S2brIK9AsPwXhStutQtYxDDNQhJlpREe+PYgHNl8Y/7Y7NkYR+wHFtFTdAcg5A6rle4xWpySyww4FqB/WpNGZbBUZLbnIMaUgdwDe94L6q30229m7oyBvG8eqqiHd55OQLemSJW0x0ypnzNE1LqeJ86VhStOmAZM4AN11N+y6G9AWd7V05Z2BcC9nOl5BU5o1fn5WLKmKms6CTMyrBkgKlbxjOMFUSbABPq3K+niNXk9uUO45UbIZRlnXe+1ez3hCfVe1vjXGtuWbzSuCwxydSHSxW97NV02WM733SuXCsc27UW5VbztJmzytMsit5lCc/325hGNrNNSb1t/1/y/1rzF2wSpa3LBs7VAAAAAElFTkSuQmCC" alt="配布用QRコード">
+    <p class="modal-sub">QRコードを読み込むとアプリが開きます</p>
+  </div>
+</div>
+
+<!-- ホーム画面追加モーダル -->
+<div id="bookmarkModal" class="modal-overlay" onclick="closeModalOverlay(event,'bookmarkModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="toggleModal('bookmarkModal')">✕</button>
+    <p class="modal-msg">ホーム画面に追加すると<br>いつでもワンタップで開けます</p>
+    <div class="modal-instructions">
+      <b>📱 iPhone（Safari）</b><br>
+      下部の共有ボタン（□↑）→「ホーム画面に追加」<br><br>
+      <b>🤖 Android（Chrome）</b><br>
+      右上の「⋮」→「ホーム画面に追加」または「インストール」<br><br>
+      <b>💻 PC</b><br>
+      Ctrl+D（Windows）／⌘+D（Mac）でブックマーク登録
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div id="statsArea"></div>
+  <div id="genreArea"></div>
+
+  <div id="yearBar" class="year-bar"></div>
+  <div id="modeBar" class="mode-bar"></div>
+  <div id="progressArea"></div>
+  <div id="quizArea"><div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><br><br>問題を読み込み中...</div></div>
+</div>
+
+<script>
+// =====================
+// 設定
+// =====================
+const JSON_FILES = [
+  'data/diesel_1k_2017.json',
+  'data/diesel_1k_2018.json',
+  'data/diesel_1k_2019.json',
+  'data/diesel_1k_2020.json',
+  'data/diesel_1k_2021.json',
+  'data/diesel_1k_2022.json',
+  'data/diesel_1k_2023.json',
+  'data/diesel_1k_2024.json',
+  'data/diesel_1k_2025.json',
+  'data/diesel_1k_2026.json',
+  // 年度が増えたらここに追加
+];
+
+// ジャンル名はJSONデータから自動抽出する（年度ごとの表記ゆれ・追加に自動対応）
+let GENRES = [];
+let GENRE_COLORS = {};
+const GENRE_PALETTE = ['#4f8ef7','#7c6af7','#22d3a0','#f7c948','#f7546a','#2dd4bf','#fb923c','#a78bfa','#34d399','#f472b6','#60a5fa','#facc15'];
+
+function computeGenres() {
+  // 出現順にユニークなジャンル名を収集
+  const seen = [];
+  allQuestions.forEach(q => {
+    if (q.genre && !seen.includes(q.genre)) seen.push(q.genre);
+  });
+  GENRES = seen;
+  GENRE_COLORS = {};
+  GENRES.forEach((g, i) => { GENRE_COLORS[g] = GENRE_PALETTE[i % GENRE_PALETTE.length]; });
+}
+
+// =====================
+// 状態
+// =====================
+let allQuestions = [];
+let filteredQuestions = [];
+let queue = [];
+let currentQ = null;
+let answered = false;
+let mode = 'all';
+let yearFilter = 'all';
+let showingWeakList = false;
+
+// localStorage で進捗保存
+const STORAGE_KEY = 'kogata1_exam_v1';
+let history = {};
+
+function loadHistory() {
+  try {
+    const s = localStorage.getItem(STORAGE_KEY);
+    history = s ? JSON.parse(s) : {};
+  } catch(e) { history = {}; }
+}
+function saveHistory() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(history)); } catch(e) {}
+}
+function confirmReset() {
+  if (confirm('進捗をすべてリセットしますか？')) {
+    history = {};
+    saveHistory();
+    buildQueue();
+    nextQuestion();
+    updateAll();
+  }
+}
+
+// =====================
+// モーダル（配布QR／ホーム画面追加）
+// =====================
+function toggleModal(id) {
+  const m = document.getElementById(id);
+  m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
+}
+function closeModalOverlay(e, id) {
+  if (e.target.id === id) toggleModal(id);
+}
+
+// =====================
+// JSONロード
+// =====================
+async function loadAllJSON() {
+  const results = [];
+  for (const file of JSON_FILES) {
+    try {
+      const res = await fetch(file);
+      const text = await res.text();
+      // {"questions":[...]} 形式と、オブジェクト連続形式の両対応
+      let questions = [];
+      try {
+        const parsed = JSON.parse(text);
+        questions = parsed.questions || (Array.isArray(parsed) ? parsed : [parsed]);
+      } catch(e) {
+        // 連続オブジェクト形式をパース
+        questions = parseNDJSON(text);
+      }
+      results.push(...questions);
+    } catch(e) {
+      console.warn(`${file} の読み込み失敗:`, e);
+    }
+  }
+  return results;
+}
+
+function parseNDJSON(text) {
+  const questions = [];
+  let depth = 0, start = null;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === '{') { if (depth === 0) start = i; depth++; }
+    else if (text[i] === '}') {
+      depth--;
+      if (depth === 0 && start !== null) {
+        try { questions.push(JSON.parse(text.slice(start, i+1))); } catch(e) {}
+        start = null;
+      }
+    }
+  }
+  return questions;
+}
+
+// =====================
+// 年度リスト
+// =====================
+function getYears() {
+  const years = [...new Set(allQuestions.map(q => q.year))].sort();
+  return years;
+}
+
+function applyFilters() {
+  filteredQuestions = allQuestions.filter(q => {
+    if (yearFilter !== 'all' && q.year !== Number(yearFilter)) return false;
+    return true;
+  });
+}
+
+// =====================
+// 出題キュー
+// =====================
+function getWeakGenres() {
+  const gstat = {};
+  GENRES.forEach(g => { gstat[g] = { c: 0, t: 0 }; });
+  Object.entries(history).forEach(([id, h]) => {
+    const q = allQuestions.find(q => q.id === id);
+    if (q && gstat[q.genre]) {
+      gstat[q.genre].t++;
+      if (h.correct) gstat[q.genre].c++;
+    }
+  });
+  return GENRES.filter(g => gstat[g].t === 0 || gstat[g].c / gstat[g].t < 0.6);
+}
+
+function buildQueue() {
+  applyFilters();
+  let pool = [...filteredQuestions];
+  if (mode === 'weak') {
+    const weak = getWeakGenres();
+    pool.sort((a, b) => {
+      const aw = weak.includes(a.genre) ? 0 : 1;
+      const bw = weak.includes(b.genre) ? 0 : 1;
+      return aw - bw || Math.random() - 0.5;
+    });
+  } else if (mode === 'unanswered') {
+    pool = pool.filter(q => !history[q.id]);
+    if (pool.length === 0) pool = [...filteredQuestions];
+  } else {
+    pool = shuffle(pool);
+  }
+  queue = pool;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+// =====================
+// 画面更新
+// =====================
+function updateAll() {
+  renderStats();
+  renderGenre();
+  renderYearBar();
+  renderModeBar();
+  renderProgress();
+}
+
+function renderStats() {
+  const keys = Object.keys(history).filter(id => filteredQuestions.find(q => q.id === id));
+  const total = keys.length;
+  const correct = keys.filter(id => history[id].correct).length;
+  const rate = total > 0 ? Math.round(correct/total*100) : 0;
+  const remain = filteredQuestions.filter(q => !history[q.id]).length;
+  document.getElementById('statsArea').innerHTML = `
+    <div class="stats-grid">
+      <div class="stat"><div class="stat-val accent">${filteredQuestions.length}</div><div class="stat-lbl">総問題数</div></div>
+      <div class="stat"><div class="stat-val">${total}</div><div class="stat-lbl">回答済み</div></div>
+      <div class="stat"><div class="stat-val green">${rate}%</div><div class="stat-lbl">正答率</div></div>
+      <div class="stat"><div class="stat-val yellow">${remain}</div><div class="stat-lbl">未回答</div></div>
+    </div>`;
+}
+
+function renderGenre() {
+  const gstat = {};
+  GENRES.forEach(g => { gstat[g] = { c: 0, t: 0 }; });
+  Object.entries(history).forEach(([id, h]) => {
+    const q = filteredQuestions.find(q => q.id === id);
+    if (q && gstat[q.genre]) {
+      gstat[q.genre].t++;
+      if (h.correct) gstat[q.genre].c++;
+    }
+  });
+  const rows = GENRES.map(g => {
+    const s = gstat[g];
+    const pct = s.t > 0 ? Math.round(s.c/s.t*100) : null;
+    const color = GENRE_COLORS[g] || '#888';
+    return `<div class="genre-row">
+      <span class="genre-name">${g}</span>
+      <div class="genre-track"><div class="genre-fill" style="width:${pct||0}%;background:${color}"></div></div>
+      <span class="genre-pct">${pct!==null?pct+'%':'-'}</span>
+      <span class="genre-cnt">${s.t}問</span>
+    </div>`;
+  }).join('');
+  document.getElementById('genreArea').innerHTML = `
+    <div class="genre-section">
+      <div class="section-label">ジャンル別正答率</div>
+      ${rows}
+    </div>`;
+}
+
+function renderYearBar() {
+  const years = getYears();
+  if (years.length <= 1) { document.getElementById('yearBar').innerHTML = ''; return; }
+  const btns = [`<button class="year-btn ${yearFilter==='all'?'active':''}" onclick="setYear('all')">全年度</button>`];
+  years.forEach(y => {
+    btns.push(`<button class="year-btn ${yearFilter==y?'active':''}" onclick="setYear(${y})">${y}年</button>`);
+  });
+  document.getElementById('yearBar').innerHTML = btns.join('');
+}
+
+function setYear(y) {
+  yearFilter = y;
+  buildQueue();
+  nextQuestion();
+  updateAll();
+}
+
+function renderModeBar() {
+  document.getElementById('modeBar').innerHTML = `
+    <button class="mode-btn ${mode==='all'?'active':''}" onclick="setMode('all')">🔀 全問題</button>
+    <button class="mode-btn ${mode==='weak'?'active':''}" onclick="setMode('weak')">⚡ 苦手強化</button>
+    <button class="mode-btn ${mode==='unanswered'?'active':''}" onclick="setMode('unanswered')">📋 未回答のみ</button>
+    <button class="mode-btn ${showingWeakList?'active':''}" onclick="toggleWeakList()">📌 苦手一覧</button>`;
+}
+
+function setMode(m) {
+  mode = m;
+  showingWeakList = false;
+  buildQueue();
+  nextQuestion();
+  updateAll();
+}
+
+function toggleWeakList() {
+  showingWeakList = !showingWeakList;
+  renderModeBar();
+  if (showingWeakList) {
+    renderWeakList();
+  } else {
+    renderQuestion(currentQ);
+  }
+}
+
+function renderWeakList() {
+  const wrong = Object.entries(history)
+    .filter(([,h]) => !h.correct)
+    .map(([id]) => filteredQuestions.find(q => q.id === id))
+    .filter(Boolean);
+  if (wrong.length === 0) {
+    document.getElementById('quizArea').innerHTML = `
+      <div class="weak-list-section">
+        <div class="section-label">苦手問題一覧</div>
+        <p style="color:var(--text3);font-size:13px;padding:10px 0">まだ不正解の問題はありません 🎉</p>
+      </div>`;
+    return;
+  }
+  const items = wrong.map(q => `
+    <div class="weak-q-item" onclick="jumpToQuestion('${q.id}')">
+      <div class="weak-q-id">${q.id}　${q.genre}</div>
+      <div>${q.question.length > 60 ? q.question.slice(0,60)+'...' : q.question}</div>
+    </div>`).join('');
+  document.getElementById('quizArea').innerHTML = `
+    <div class="weak-list-section">
+      <div class="section-label">苦手問題一覧（${wrong.length}問）</div>
+      ${items}
+      <p style="color:var(--text3);font-size:11px;margin-top:8px">タップすると出題します</p>
+    </div>`;
+}
+
+function jumpToQuestion(id) {
+  const q = allQuestions.find(q => q.id === id);
+  if (!q) return;
+  showingWeakList = false;
+  renderModeBar();
+  currentQ = q;
+  answered = false;
+  renderQuestion(q);
+  renderProgress();
+}
+
+function renderProgress() {
+  const done = filteredQuestions.filter(q => history[q.id]).length;
+  const total = filteredQuestions.length;
+  const pct = total > 0 ? Math.round(done/total*100) : 0;
+  document.getElementById('progressArea').innerHTML = `
+    <div class="progress-wrap">
+      <div class="progress-top"><span>進捗 ${done} / ${total} 問</span><span>${pct}%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+    </div>`;
+}
+
+// =====================
+// 出題
+// =====================
+function nextQuestion() {
+  if (showingWeakList) return;
+  answered = false;
+  if (queue.length === 0) buildQueue();
+  if (queue.length === 0) { showResult(); return; }
+  currentQ = queue.shift();
+  renderQuestion(currentQ);
+}
+
+function renderQuestion(q) {
+  if (!q) return;
+  const stars = '★'.repeat(q.difficulty||1) + '☆'.repeat(3-(q.difficulty||1));
+  const imgHtml = q.image
+    ? `<img class="q-img" src="img/${q.image}" alt="問題図" onerror="this.outerHTML='<div class=q-img-placeholder>📷 図：img/${q.image}<br><small>img/ フォルダに画像ファイルを置いてください</small></div>'">`
+    : '';
+  const choicesHtml = q.choices.map(c => `
+    <button class="choice" onclick="selectAnswer('${c.label}')" id="ch-${c.label}">
+      <span class="choice-lbl">${c.label}</span>
+      <span>${c.text}</span>
+    </button>`).join('');
+
+  document.getElementById('quizArea').innerHTML = `
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="badge badge-genre">${q.genre}</span>
+        <span class="badge badge-year">${q.year}年3月実施</span>
+        <span class="badge badge-diff">${stars}</span>
+        <span class="badge" style="background:var(--bg3);color:var(--text3)">No.${q.id}</span>
+      </div>
+      <p class="q-text">${q.question}</p>
+      ${imgHtml}
+      <div class="choices">${choicesHtml}</div>
+      <div id="expArea"></div>
+      <div id="btnRow" style="display:none">
+        <div class="btn-row">
+          <button class="btn-next" onclick="nextQuestion()">次の問題 →</button>
+          <button class="btn-weak" onclick="setMode('weak')">苦手強化</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function selectAnswer(label) {
+  if (answered) return;
+  answered = true;
+  const q = currentQ;
+  const isAll = q.answer === 'all';
+  const isCorrect = isAll || label === q.answer;
+  history[q.id] = { correct: isCorrect, selected: label };
+  saveHistory();
+
+  // ボタン色変更
+  q.choices.forEach(c => {
+    const btn = document.getElementById('ch-' + c.label);
+    if (!btn) return;
+    btn.disabled = true;
+    if (isAll || c.label === q.answer) btn.classList.add('reveal');
+    else if (c.label === label && !isCorrect) btn.classList.add('wrong');
+  });
+
+  // 解説
+  const wrongEntries = Object.entries(q.explanation.wrong)
+    .filter(([k]) => isAll || k !== q.answer)
+    .map(([k,v]) => `<div class="exp-wrong-item"><span class="lbl">✗ ${k}</span><span>${v}</span></div>`)
+    .join('');
+
+  document.getElementById('expArea').innerHTML = `
+    <div class="explanation">
+      <div class="exp-result ${isCorrect?'ok':'ng'}">${isAll ? '✅ 本問は全員正解として処理されています' : (isCorrect ? '✅ 正解！' : `❌ 不正解　正解は ${q.answer}`)}</div>
+      <div class="exp-correct"><span>【正解の理由】</span><br>${q.explanation.correct}</div>
+      ${wrongEntries ? `<div class="exp-wrong">${wrongEntries}</div>` : ''}
+    </div>`;
+  document.getElementById('btnRow').style.display = 'block';
+  updateAll();
+}
+
+// =====================
+// 結果画面
+// =====================
+function showResult() {
+  const keys = Object.keys(history).filter(id => filteredQuestions.find(q => q.id === id));
+  const total = keys.length;
+  const correct = keys.filter(id => history[id].correct).length;
+  const pct = total > 0 ? Math.round(correct/total*100) : 0;
+  const cls = pct >= 80 ? 'great' : pct >= 60 ? 'good' : 'poor';
+  const weakGenres = getWeakGenres();
+
+  document.getElementById('quizArea').innerHTML = `
+    <div class="result-card">
+      <div class="result-pct ${cls}">${pct}%</div>
+      <div class="result-sub">${total}問中 ${correct}問正解</div>
+      ${weakGenres.length > 0 ? `
+        <div class="weak-section">
+          <div class="weak-title">⚡ 苦手ジャンル</div>
+          <div class="weak-tags">${weakGenres.map(g=>`<span class="weak-tag">${g}</span>`).join('')}</div>
+        </div>` : '<p style="color:var(--green);font-size:14px">🎉 全ジャンル60%以上達成！</p>'}
+      <div class="result-btns">
+        <button class="btn-next" style="min-width:120px" onclick="restartAll()">もう一度</button>
+        <button class="btn-weak" onclick="setMode('weak')">苦手を集中出題</button>
+      </div>
+    </div>`;
+}
+
+function restartAll() {
+  buildQueue();
+  nextQuestion();
+  updateAll();
+}
+
+// =====================
+// 初期化
+// =====================
+async function init() {
+  loadHistory();
+  allQuestions = await loadAllJSON();
+  computeGenres();
+  if (allQuestions.length === 0) {
+    document.getElementById('quizArea').innerHTML = `
+      <div class="loading" style="color:var(--red)">
+        ⚠️ JSONファイルが読み込めませんでした<br>
+        <small style="margin-top:8px;display:block">data/ フォルダにJSONファイルを配置してください</small>
+      </div>`;
+    return;
+  }
+  buildQueue();
+  updateAll();
+  nextQuestion();
+}
+
+init();
+</script>
+</body>
+</html>
